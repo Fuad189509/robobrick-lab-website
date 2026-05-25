@@ -1,21 +1,21 @@
 <?php
 
-// Set environment variables for Vercel
+// Set environment variables for Vercel BEFORE requiring Laravel
 putenv('VIEW_COMPILED_PATH=/tmp');
 putenv('CACHE_STORE=array');
 putenv('SESSION_DRIVER=cookie');
 putenv('LOG_CHANNEL=stderr');
 
-// Override storage paths to use /tmp (writable on Vercel)
-$app = require __DIR__ . '/../bootstrap/app.php';
-
-$app->useStoragePath('/tmp/storage');
+// Define storage paths to use /tmp (writable on Vercel)
+define('LARAVEL_STORAGE_PATH', '/tmp/storage');
 
 // Ensure necessary directories exist in /tmp
 $directories = [
     '/tmp/storage/framework/views',
     '/tmp/storage/framework/cache',
     '/tmp/storage/logs',
+    '/tmp/storage/app',
+    '/tmp/storage/app/public',
 ];
 
 foreach ($directories as $dir) {
@@ -24,5 +24,5 @@ foreach ($directories as $dir) {
     }
 }
 
-// Handle the request
-$app->handleRequest(Illuminate\Http\Request::capture());
+// Now require Laravel's public index.php
+require __DIR__ . '/../public/index.php';
