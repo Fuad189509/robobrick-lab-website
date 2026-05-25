@@ -19,7 +19,5 @@
       "dest": "/api/index.php"
     }
   ],
-  "outputDirectory": "public",
-  "installCommand": "composer install --no-dev --optimize-autoloader ; npm install",
-  "buildCommand": "npm run build"
+  "outputDirectory": "public"
 }
