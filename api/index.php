@@ -1,6 +1,9 @@
 <?php
 
-// Set environment variables for Vercel BEFORE requiring Laravel
+// Require Composer autoloader FIRST!
+require __DIR__ . '/../vendor/autoload.php';
+
+// Set environment variables for Vercel
 putenv('VIEW_COMPILED_PATH=/tmp');
 putenv('CACHE_STORE=array');
 putenv('SESSION_DRIVER=cookie');
